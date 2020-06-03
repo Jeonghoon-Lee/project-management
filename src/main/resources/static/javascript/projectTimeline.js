@@ -5,7 +5,6 @@ var timelineArray = JSON.parse(decodeHtml(timelineData));
 var timelineData = timelineArray.map(function (project) {
     return [project.name, new Date(project.startDate), new Date(project.endDate)]
 })
-console.log(timelineData);
 
 function drawChart() {
     var container = document.getElementById('timeline');

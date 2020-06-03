@@ -33,7 +33,6 @@
                 <canvas id="myPieChart" height="50" width="50"></canvas>
                 <script>
                     var chartData = "[[${projectStatusCnt}]]"
-                    console.log(chartData)
                 </script>
             </div>
         </div>
@@ -61,6 +60,7 @@
         </div>
     </div>
 
+    <script type="text/javascript" th:src="@{javascript/utils.js}"></script>
     <script type="text/javascript" th:src="@{javascript/myChart.js}"></script>
 </body>
 </html>
