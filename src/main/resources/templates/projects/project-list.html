@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: header"></head>
+<body>
+    <nav th:replace="layouts :: navbar"></nav>
+    <div class="container">
+        <h4>Current Projects</h4>
+        <hr>
+        <a th:href="@{/projects/new}" class="btn btn-primary btn-sm mb-3">New Project</a>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Project Name</th>
+                <th>Project Stage</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${projectList}">
+                <td th:text="${project.name}" />
+                <td th:text="${project.stage}" />
+                <td th:text="${#dates.format(project.startDate, 'yyyy-MM-dd')}" />
+                <td th:text="${#dates.format(project.endDate, 'yyyy-MM-dd')}" />
+                <td>
+                    <a th:href="@{/projects/update(id=${project.projectId})}"
+                       class="btn btn-info btn-sm">
+                        Update
+                    </a>
+                    <a th:href="@{/projects/delete(id=${project.projectId})}"
+                       class="btn btn-danger btn-sm"
+                       onClick="if (!confirm('Are you sure you want to delete this project?')) return false">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container mt-5">
+        <h4>Project Timeline</h4>
+        <hr>
+        <div id="timeline"></div>
+        <script>
+            var timelineData = "[[${projectTimeline}]]"
+            console.log(timelineData)
+        </script>
+    </div>
+
+    <script type="text/javascript" th:src="@{javascript/projectTimeline.js}"></script>
+</body>
+</html>

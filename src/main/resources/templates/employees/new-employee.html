@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts :: header"></head>
+<body>
+
+<nav th:replace="layouts :: navbar"></nav>
+<br />
+<div class="container">
+    <!-- we don't need csrf token because thymeleaf takes care of it. -->
+    <form th:action="@{/employees/save}" th:object="${employee}" method="POST">
+        <!-- This will be used to bind to the employee that was clicked on (USED FOR UPDATE) -->
+        <input type="hidden" th:field="${employee.employeeId}"/>
+
+        <div class="form-group row">
+            <input type="text" placeholder="First Name" th:field="${employee.firstName}">
+            <span class="text-danger" th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="${employee.firstName}"></span>
+        </div>
+
+        <div class="form-group row">
+            <input type="text" placeholder="Last Name" th:field="${employee.lastName}">
+            <span class="text-danger" th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="${employee.lastName}"></span>
+        </div>
+
+        <div class="form-group row">
+            <input type="email" placeholder="Email" th:field="${employee.email}">
+            <span class="text-danger" th:if="${#fields.hasErrors('email')}"
+                  th:errors="${employee.email}"></span>
+        </div>
+        <!-- csrf token -->
+        <!--<input type="hidden" name="_csrf" th:value="${_csrf.token}"} />-->
+        <button class="btn btn-info col-2" type="submit">Enter Employee</button>
+    </form>
+</div>
+</body>
+</html>
